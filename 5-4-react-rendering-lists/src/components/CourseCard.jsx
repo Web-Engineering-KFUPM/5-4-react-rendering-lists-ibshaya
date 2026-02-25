@@ -17,6 +17,9 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     // TODO (TASK 4): remove the task with matching id
   }
 
+  const hasTasks = course.tasks.length > 0;
+  const allDone = hasTasks && course.tasks.every((t) => t.isDone);
+
   // Helpful hints for TASK 3 (optional to use)
   // const hasTasks = course.tasks.length > 0;
   // const allDone = hasTasks && course.tasks.every(t => t.isDone);
@@ -30,11 +33,15 @@ export default function CourseCard({ course, index, onMutateCourse }) {
             - course has tasks AND
             - all tasks are done
             Use logical && */}
+        {allDone && <span className="badge">All caught up</span>}
       </header>
 
       <section className="tasksSection">
 
         {/* DISPLAY ONLY: Show a message when there are no tasks */}
+        {course.tasks.length === 0 && (
+          <p className="muted">No tasks yet.</p>
+        )}
         
         <ul className="tasks">
           {course.tasks.map((task) => (
